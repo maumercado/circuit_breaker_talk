@@ -1,14 +1,9 @@
-import {
-  CodeSurfer,
-  CodeSurferColumns,
-  Step
-} from "code-surfer";
+import { CodeSurfer } from "code-surfer";
 import { Notes, Appear, Image } from "mdx-deck";
 import { vsDark, nightOwl } from "@code-surfer/themes";
 import ListLayout from './components/ListLayout';
 import SocialFollow from './components/Social'
 import CircuitBreakerImg from "./images/Circuit_Breaker.png";
-
 export const theme = nightOwl;
 
 
@@ -163,6 +158,62 @@ export const theme = nightOwl;
     </li>
   </ul>
 </ListLayout>
+
+---
+
+<div>
+<CodeSurfer>
+
+  ```js title="Circuit Breaker" file=./code/CircuitBreaker.js
+  ```
+
+  ```js 2 1:9 title="Circuit Breaker" subtitle="Singleton" file=./code/CircuitBreaker.js
+  ```
+
+  ```js 3 35:37 title="Circuit Breaker" subtitle="Singleton" file=./code/CircuitBreaker.js
+  ```
+
+  ```js 4 11:24 title="Circuit Breaker" subtitle="Class Properties" file=./code/CircuitBreaker.js
+  ```
+
+  ```js 5 25:33 title="Circuit Breaker" subtitle="Automatic Heal" file=./code/CircuitBreaker.js
+  ```
+
+</CodeSurfer>
+
+<ul>
+<Notes>
+  <li>Singleton to be able to coordinate actions throughout the system</li>
+  <li>maxError maximum times an error can happen before opening the circuit</li>
+  <li>maxTime resets error count after MaxTime</li>
+  <li>retry allows half opening the circuit after retry time</li>
+</Notes>
+</ul>
+</div>
+
+---
+
+<CodeSurfer>
+
+  ```js 1 39:45 title="Circuit Breaker" subtitle="... it starts here!" file=./code/CircuitBreaker.js
+  ```
+
+  ```js 2 47:69 title="Circuit Breaker" subtitle="... execute!" file=./code/CircuitBreaker.js
+  ```
+
+  ```js 3 53:55 title="Circuit Breaker" subtitle="... timeout enabled?" file=./code/CircuitBreaker.js
+  ```
+
+  ```js 4 71:75 title="Circuit Breaker" file=./code/CircuitBreaker.js
+  ```
+
+  ```js 5 47:69 title="Circuit Breaker" file=./code/CircuitBreaker.js
+  ```
+
+  ```js 6 77:86 title="Circuit Breaker" subtitle="...setting state" file=./code/CircuitBreaker.js
+  ```
+
+</CodeSurfer>
 
 ---
 

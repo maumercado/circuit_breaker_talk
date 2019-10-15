@@ -1,152 +1,171 @@
 import {
   CodeSurfer,
   CodeSurferColumns,
-  Step,
+  Step
 } from "code-surfer";
-import { github, vsDark } from "@code-surfer/themes";
+import { Notes, Appear, Image } from "mdx-deck";
+import { vsDark, nightOwl } from "@code-surfer/themes";
+import ListLayout from './components/ListLayout';
+import CircuitBreakerImg from "./images/Circuit_Breaker.png";
 
-export const theme = vsDark;
+export const theme = nightOwl;
 
-# Hello 👋
 
-You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](https://codesurfer.pomb.us)
-
----
-
-<CodeSurfer>
-
-```js title="This is a title" subtitle="and this a subtitle"
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
-}
-
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
-
-  if (!sit || ut < 1) {
-    return [];
-  }
-
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
-
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
-
-  return aliqua;
-}
-```
-
-```js
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
-}
-
-function adipiscing(...elit) {
-  if (!elit.sit) {
-    return [];
-  }
-
-  const sed = elit[0];
-  return eiusmod.tempor(sed) ? sed : [sed];
-}
-
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
-
-  if (!sit || ut < 1) {
-    return [];
-  }
-
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
-
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
-
-  return aliqua;
-}
-```
-
-```diff 1[10:14],2[15:19],3[22:27],10:12
-
-```
-
-</CodeSurfer>
+## Circuit Breaker Design Pattern
+#### Mauricio Mercado
 
 ---
 
-<CodeSurferColumns themes={[vsDark, github]}>
+# $(whoami) 👋
 
-<Step>
-
-```js
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
-```
-
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
-```
-
-</Step>
-
-<Step>
-
-```js
-const lorem = (ipsum, dolor, sit) => {
-  const amet = dolor - ipsum;
-  return consectetur.adipiscing(
-    {
-      elit: sed.eiusmod(sit - dolor) / amet + 2,
-    },
-    (tempor, incididunt) => ipsum + amet * incididunt
-  );
-};
-
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
-```
-
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
-
-const sed = (eiusmod, tempor, incididunt) => {
-  const ut = tempor - eiusmod;
-  return labore.et(
-    {
-      amet: dolore.magna(incididunt - tempor) / ut + 2,
-    },
-    (aliqua, elit) => eiusmod + ut * elit
-  );
-};
-```
-
-</Step>
-
-</CodeSurferColumns>
+<div>
+  <ul>
+    <Appear>
+      <li>Originally from 🇨🇴</li>
+      <li>Creator of 🐞since 2010</li>
+      <li>Lots of JS (React, NodeJS)</li>
+      <li>Working For Telus Digital</li>
+    </Appear>
+  </ul>
+  <Notes>
+    <ul>
+      <li>creating bugs, python, ror</li>
+      <li>javascript nodejs react</li>
+      <li>
+        Work Telus Digital team responsible creating the tools for
+        developer experience and evaluating the technologies used at telus.
+      </li>
+    </ul>
+  </Notes>
+</div>
 
 ---
 
-docs:  
-[codesurfer.pomb.us](https://codesurfer.pomb.us)
+## A little background
+
+<ListLayout>
+  <ul>
+    <Appear>
+      <li>Much our our API's are dependent on other remote services</li>
+      <li>Remote services can fail or hang</li>
+      <li>Many unresponsive services can lead to failure in multiple systems</li>
+    </Appear>
+  </ul>
+  <ul>
+    <Notes>
+      <li>Software running in other processes and probably other computers</li>
+      <li>
+        Unlike in-memory calls, remote calls can fail, or hang without response,
+        leading to detriment of user experience
+      </li>
+      <li>
+        Dependent Services can run out or resources leading to cascading failures
+        across multiple systems
+      </li>
+    </Notes>
+  </ul>
+</ListLayout>
+
+---
+
+## Expected behavior...
+
+<ListLayout>
+  <ul>
+    <Appear>
+      <li>A failure in a service dependency should not break the user experience for members</li>
+      <li>Our system should automatically take corrective action when one of its service dependencies fails</li>
+    </Appear>
+  </ul>
+  <ul>
+    <Notes>
+      <li>What are our thresholds for error?</li>
+      <li>We should provide fallback functionality</li>
+    </Notes>
+  </ul>
+</ListLayout>
+
+---
+
+## Enter the circuit breaker
+
+<ListLayout>
+  <ul>
+    <Appear>
+      <li>Custom fallback</li>
+      <li>Fail fast</li>
+      <li>Don’t crash</li>
+      <li>Heal automatic</li>
+    </Appear>
+  </ul>
+  <ul>
+    <Notes>
+      <li>
+        Try to get the same data from some other source. If not possible, use its own cache value.
+      </li>
+      <li>
+        If serviceA knows that serviceB is down, there is no point waiting for
+        the timeout and consuming its own resources. It should return ASAP “knowing” that serviceB is down
+      </li>
+      <li>As we saw in this case, serviceA should not have crashed.</li>
+      <li>Periodically check if serviceB is working again.</li>
+      <li>All other APIs should continue to work.</li>
+    </Notes>
+  </ul>
+</ListLayout>
+
+---
+
+## How does it work?
+
+<div>
+  <div style="background: white">
+    <img src={CircuitBreakerImg} />
+  </div>
+  <ul>
+    <Notes>
+      <li>
+        In the normal closed state the operations are as usual:
+        if a call succeeds nothing happens, if it fails, the circuit
+        breaker makes a note of the failure, once this number exceeds a threshold
+        the circuit breaker opens.
+      </li>
+      <li>
+        Once the circuit is open calls to the circuit breaker will fail immediately or
+        it will return the fallback
+      </li>
+      <li>
+        After some time the Circuit Breaker will attempt to reset, so it goes into half
+        open state, attempts to make the call if it succeeds it resets if not it keeps the
+        circuit open.
+      </li>
+      <li>It makes periodic calls to check the health of a service.</li>
+    </Notes>
+  </ul>
+</div>
+
+---
+
+# DEMO
+
+---
+
+## More information
+
+ <ul style="list-style-type:square;">
+  <li>
+    <a href="https://martinfowler.com/bliki/CircuitBreaker.html">
+      Martin Fowler: Circuit Breaker
+    </a>
+  </li>
+  <li>
+    <a href="https://medium.com/netflix-techblog/making-the-netflix-api-more-resilient-a8ec62159c2d">
+      Making The Netflix API More Resilient
+    </a>
+  </li>
+  <li>
+    <a href="https://www.amazon.com/Release-Design-Deploy-Production-Ready-Software/dp/1680502395/">
+      Release It!: Design and Deploy Production-Ready Software (2nd Edition)
+    </a>
+  </li>
+</ul>
